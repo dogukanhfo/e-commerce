@@ -27,7 +27,7 @@ public class Product {
 		return name;
 	}
 	
-	public void SetName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	
@@ -35,7 +35,7 @@ public class Product {
 		return description;
 	}
 	
-	public void SetDescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 	
