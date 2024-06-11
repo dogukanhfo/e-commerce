@@ -35,8 +35,8 @@ public class ProductService {
 		Product p = productRepository.findById(productId).orElse(null);
 		
 		if (p != null) {
-			p.SetName(product.getName());
-			p.SetDescription(product.getDescription());
+			p.setName(product.getName());
+			p.setDescription(product.getDescription());
 			p.setQuantity(product.getQuantity());
 			p.setPrice(product.getPrice());
 			productRepository.save(p);
