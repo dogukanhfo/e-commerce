@@ -1,5 +1,7 @@
 package com.project.ecommerce.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,5 +45,10 @@ public class ProductService {
 		} else {
 			System.out.print("Given productId does not matches any product.");
 		}
+	}
+	
+	public List<Product> searchProducts(String query) {
+		List<Product> products = productRepository.searchProducts(query);
+		return products;
 	}
 }

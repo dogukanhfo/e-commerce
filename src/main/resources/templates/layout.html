@@ -32,6 +32,11 @@
                         </ul>
                     </li>
                 </ul>
+                <form th:action="@{/products/search}">
+			    	<div class="form-group">
+			    		<input type="search" name="query" class="form-control" id="searchInput" placeholder="Search products">
+			    	</div>
+				</form>
                 <form class="d-flex">
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="bi-cart-fill me-1"></i>

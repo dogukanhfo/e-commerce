@@ -1,5 +1,7 @@
 package com.project.ecommerce.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.ecommerce.models.Product;
 import com.project.ecommerce.services.ProductService;
@@ -59,5 +62,12 @@ public class ProductController {
 	public String deleteProduct(@PathVariable Long id) {
 		productService.deleteProduct(id);
 		return "redirect:/products";
+	}
+	
+	@GetMapping("/search")
+	public String searchProduct(@RequestParam(value="query") String query, Model model) {
+		List<Product> products = productService.searchProducts(query);
+		model.addAttribute("products", products);
+		return "products";
 	}
 }
