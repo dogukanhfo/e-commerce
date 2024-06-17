@@ -16,58 +16,70 @@ import com.project.ecommerce.models.Product;
 import com.project.ecommerce.services.ProductService;
 
 @Controller
-@RequestMapping(value = "/products")
 public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@GetMapping()
+	@GetMapping("/products")
 	public String getAllProducts(Model model) {
 		model.addAttribute("products", productService.getAllProducts());
 		return "products";
 	}
+
+	@GetMapping("/products/search")
+	public String searchProduct(@RequestParam(value="query") String query, Model model) {
+		List<Product> products = productService.searchProducts(query);
+		model.addAttribute("products", products);
+		return "products";
+	}
 	
-	@GetMapping("/{name}-{id}")
+	@GetMapping("/admin/products")
+	public String getAllAdminProducts(Model model) {
+		model.addAttribute("products", productService.getAllProducts());
+		return "admin-products";
+	}
+	
+	@GetMapping("/products/{name}-{id}")
 	public String getProduct(@PathVariable Long id, Model model) {
 		model.addAttribute("product", productService.getProductById(id));
 		return "product";
 	}
 	
-	@GetMapping("/new")
+	@GetMapping("/admin/products/new")
 	public String createProductForm(Model model) {
 		Product product = new Product();
 		model.addAttribute("product", product);
 		return "create-product";
 	}
 	
-	@PostMapping("/new")
+	@PostMapping("/admin/products/new")
 	public String saveProduct(@ModelAttribute("product") Product product) {
 		productService.saveProduct(product);
-		return "redirect:/products";
+		return "redirect:/admin/products";
 	}
 	
-	@GetMapping("/update/{id}")
+	@GetMapping("/admin/products/update/{id}")
 	public String updateProductForm(@PathVariable Long id, Model model) {
 		model.addAttribute("product", productService.getProductById(id));
 		return "update-product";
 	}
 	
-	@PostMapping("/update/{id}")
+	@PostMapping("/admin/products/update/{id}")
 	public String updateProduct(@ModelAttribute("product") Product product, @PathVariable Long id) {
 		productService.updateProduct(product, id);
-		return "redirect:/products";
+		return "redirect:/admin/products";
 	}
 	
-	@GetMapping("/{id}/delete")
+	@GetMapping("/admin/products/delete/{id}")
 	public String deleteProduct(@PathVariable Long id) {
 		productService.deleteProduct(id);
-		return "redirect:/products";
+		return "redirect:/admin/products";
 	}
 	
-	@GetMapping("/search")
-	public String searchProduct(@RequestParam(value="query") String query, Model model) {
+	@GetMapping("/admin/products/search")
+	public String searchAdminProduct(@RequestParam(value="query") String query, Model model) {
 		List<Product> products = productService.searchProducts(query);
 		model.addAttribute("products", products);
-		return "products";
+		return "admin-products";
 	}
 }

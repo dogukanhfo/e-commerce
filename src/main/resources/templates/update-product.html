@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout}">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin-layout}">
 <head>
-	<title>Update Product</title>
+<title th:text="${product.name} + ' update'"></title>
 </head>
 <body>
-	<section layout:fragment="body" class="py-5">
+	<main layout:fragment="main" class="py-5">
 		<div class="container px-4 px-lg-5 my-5">
-            <form role="form" method="post" th:action="@{'/products/update/' + ${product.id}}" th:object="${product}">
+			<form role="form" method="post" th:action="@{'/admin/products/update/' + ${product.id}}" th:object="${product}">
 			  
 			    <div class="form-group col-md-6">
 			      <label for="inputName">Name</label>
@@ -52,7 +52,8 @@
 			  </div>
 			  <button type="submit" class="btn btn-primary mt-4">Update product</button>
 			</form>
-        </div>
-	</section>
+		</div>
+	</main>
 </body>
 </html>
+

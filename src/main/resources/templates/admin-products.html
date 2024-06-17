@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin-layout}">
+<head>
+<title>Admin Login</title>
+</head>
+<body>
+	<main layout:fragment="main" class="py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<form th:action="@{/admin/products/search}">
+				<div class="form-group">
+					<input type="search" name="query" class="form-control"
+						id="searchInput" placeholder="Search products">
+				</div>
+			</form>
+			<hr>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Title</th>
+						<th scope="col">Quantity</th>
+						<th scope="col">Price</th>
+					</tr>
+				</thead>
+				<tbody th:each="product: ${products}">
+					<tr>
+						<th scope="row" th:text="${product.id}"></th>
+						<td th:text="${product.name}"></td>
+						<td th:text="${product.quantity}"></td>
+						<td th:text="${product.price}"></td>
+						<td><a th:href="@{'/admin/products/update/' + ${product.id}}">Update</a></td>
+						<td><a th:href="@{'/admin/products/delete/' + ${product.id}}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<a th:href="@{/admin/products/new}">Create new product</a>
+		</div>
+	</main>
+</body>
+</html>

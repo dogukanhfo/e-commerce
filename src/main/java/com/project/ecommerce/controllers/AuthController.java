@@ -20,6 +20,24 @@ public class AuthController {
 		return "login";
 	}
 	
+	@GetMapping("/admin/login")
+	public String getAdminLoginPage() {
+		return "admin-login";
+	}
+	
+	@GetMapping("/admin/register")
+	public String getAdminRegisterForm(Model model) {
+		UserEntity adminUser = new UserEntity();
+		model.addAttribute("admin", adminUser);
+		return "admin-register";
+	}
+	
+	@PostMapping("/admin/register/save")
+	public String registerAdmin(@ModelAttribute("admin") UserEntity admin) {
+		userService.saveAdmin(admin);
+		return "redirect:/admin/login";
+	}
+	
 	@GetMapping("/register")
 	public String getRegisterForm(Model model) {
 		UserEntity user = new UserEntity();

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{admin-layout}">
+<head>
+	<title>Admin Login</title>
+</head>
+<body>
+	<main layout:fragment="main" class="py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div th:if="${param.failed}" class="alert alert-danger">
+				Invalid username or password.
+			</div>
+			<div th:if="${param.logout}" class="alert alert-success">
+				Logged out!
+			</div>
+        	<form method="post" th:action="@{/admin/register/save}" th:object="${admin}">
+        	  <div class="form-group">
+			    <label for="nameInput">Name</label>
+			    <input 
+			    	type="text" 
+			    	class="form-control" 
+			    	id="nameInput" 
+			    	th:field="*{name}"
+			    	placeholder="John Doe">
+			  </div>
+			  <div class="form-group">
+			    <label for="usernameInput">Username</label>
+			    <input 
+			    	type="text" 
+			    	class="form-control" 
+			    	id="usernameInput" 
+			    	th:field="*{username}"
+			    	placeholder="Username">
+			  </div>
+			  <div class="form-group">
+			    <label for="emailInput">Email</label>
+			    <input 
+			    	type="email" 
+			    	class="form-control" 
+			    	id="emailInput" 
+			    	th:field="*{email}"
+			    	placeholder="Email">
+			  </div>
+			  <div class="form-group">
+			    <label for="passwordInput">Password</label>
+			    <input 
+			    	type="password" 
+			    	class="form-control" 
+			    	id="passwordInput" 
+			    	th:field="*{password}"
+			    	placeholder="Password">
+			  </div>
+			  <a th:href="@{/admin/login}" type="submit" class="btn btn-black mt-4">Do you have an account already. Login here.</a>
+			  <button type="submit" class="btn btn-primary mt-4">Register</button>
+			</form>
+        </div>
+	</main>
+</body>
+</html>

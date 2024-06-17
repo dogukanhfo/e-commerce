@@ -30,4 +30,15 @@ public class UserService {
 		user.setRoles(Arrays.asList(role));
 		userRepository.save(user);
 	}
+	
+	public void saveAdmin(UserEntity userEntity) {
+		UserEntity user = new UserEntity();
+		user.setUsername(userEntity.getUsername());
+		user.setEmail(userEntity.getEmail());
+		user.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+		user.setName(userEntity.getName());
+		Role role = roleRepository.findByName("ADMIN");
+		user.setRoles(Arrays.asList(role));
+		userRepository.save(user);
+	}
 }
