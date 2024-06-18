@@ -41,6 +41,8 @@ public class ProductService {
 			p.setDescription(product.getDescription());
 			p.setQuantity(product.getQuantity());
 			p.setPrice(product.getPrice());
+			p.setCategory(product.getCategory());
+			p.setPhotoUrl(product.getPhotoUrl());
 			productRepository.save(p);
 		} else {
 			System.out.print("Given productId does not matches any product.");

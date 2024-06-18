@@ -14,6 +14,8 @@ public class Product {
 	private String description;
 	private Integer quantity;
 	private Float price;
+	private String category;
+	private String photoUrl;
 	
 	public Long getId() {
 		return id;
@@ -53,5 +55,21 @@ public class Product {
 	
 	public void setPrice(Float price) {
 		this.price = price;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+	
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
 	}
 }
