@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>Thank you for your order</title>
+</head>
+<body>
+	<section layout:fragment="body" class="py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="container">
+				<h1>Order Confirmation</h1>
+				<p>Thank you for your order! Your order has been successfully
+					placed.</p>
+				<a th:href="@{/products}" class="btn btn-primary">Continue Shopping</a>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

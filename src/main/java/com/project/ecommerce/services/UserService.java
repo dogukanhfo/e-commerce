@@ -1,6 +1,7 @@
 package com.project.ecommerce.services;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,5 +41,35 @@ public class UserService {
 		Role role = roleRepository.findByName("ADMIN");
 		user.setRoles(Arrays.asList(role));
 		userRepository.save(user);
+	}
+	
+	public List<UserEntity> getAllUsers() {
+		return userRepository.findAll();
+	}
+	
+	public UserEntity getUserById(Long id) {
+		return userRepository.findById(id).orElse(null);
+	}
+	
+	public UserEntity getUserByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
+	
+	public void updateUser(UserEntity user, Long id) {
+		UserEntity u = userRepository.findById(id).orElse(null);
+		
+		if (u != null) {
+			u.setUsername(user.getUsername());
+			u.setEmail(user.getEmail());
+			u.setPassword(user.getPassword());
+			u.setName(user.getName());
+			userRepository.save(u);
+		} else {
+			System.out.println("There is no user matches with given id.");
+		}
+	}
+	
+	public void deleteUser(Long id) {
+		userRepository.deleteById(id);
 	}
 }

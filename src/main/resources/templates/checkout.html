@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>Checkout</title>
+</head>
+<body>
+	<section layout:fragment="body" class="py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="container">
+				<h1>Checkout</h1>
+				<form th:action="@{/checkout}" method="post">
+					<div class="form-group">
+						<label for="paymentMethod">Payment Method</label> <select
+							class="form-control" id="paymentMethod" name="paymentMethod">
+							<option value="Credit Card">Credit Card</option>
+							<option value="PayPal">PayPal</option>
+						</select>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit
+						Payment</button>
+				</form>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

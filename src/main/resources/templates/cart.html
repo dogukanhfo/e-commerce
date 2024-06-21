@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+<head>
+<title>Shopping Cart</title>
+</head>
+<body>
+	<section layout:fragment="body" class="py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="container">
+				<h1>Shopping Cart</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Product</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Total</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="item : ${cart.items}">
+							<td th:text="${item.product.name}"></td>
+							<td th:text="${item.quantity}"></td>
+							<td th:text="${item.product.price}"></td>
+							<td th:text="${item.totalPrice}"></td>
+							<td>
+								<form th:action="@{/cart/remove}" method="post">
+									<input type="hidden" name="productId"
+										th:value="${item.product.id}" />
+									<button type="submit" class="btn btn-danger">Remove</button>
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<h3>
+						Total: <span th:text="${cart.totalAmount}"></span>
+					</h3>
+					<a href="/checkout" class="btn btn-success">Checkout</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
