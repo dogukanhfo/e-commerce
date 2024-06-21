@@ -30,7 +30,7 @@ public class SecurityConfig {
 						.requestMatchers("/admin/login", "/admin/register","/admin/register/save", "/login", "/register", "/register/save").anonymous()
 						.requestMatchers("/admin/**").hasAuthority("ADMIN")
 						.requestMatchers("/css/**", "/js/**", "/products/**", "/cart/**").permitAll()
-						.requestMatchers("/home", "/checkout/**", "/orders").authenticated())
+						.requestMatchers("/home", "/checkout/**", "/orders/**").authenticated())
 						)
 				.formLogin((form) -> form
 						.loginPage("/login")

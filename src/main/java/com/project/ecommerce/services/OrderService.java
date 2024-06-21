@@ -33,6 +33,13 @@ public class OrderService {
 		return orderRepository.save(order);
 	}
 	
+	public Order updateOrderStatus(Long customerId, String status) {
+		Order order = getOrderById(customerId);
+		order.setStatus(status);
+		
+		return orderRepository.save(order);
+	}
+	
 	public List<Order> getAllOrders() {
 		return orderRepository.findAll();
 	}
@@ -47,5 +54,9 @@ public class OrderService {
 	
 	public List<Order> getOrdersByCustomerId(Long customerId) {
 		return orderRepository.findByCustomerId(customerId);
+	}
+	
+	public List<Order> getOrdersByStatus(String status) {
+		return orderRepository.findByStatus(status);
 	}
 }

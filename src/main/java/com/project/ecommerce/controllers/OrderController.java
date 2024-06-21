@@ -24,33 +24,40 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@Autowired
-	private ProductService productService;
-	
 	@Autowired 
 	private UserService userService;
 	
-	@PostMapping("/orders/new")
-	public String createOrder(@RequestParam Long customerId, @RequestParam List<Long> productIds, @RequestParam List<Integer> quantities, @RequestParam String paymentMethod) {
-		List<OrderItem> orderItems = new ArrayList<>();
-		
-		for (int i = 0; i < productIds.size(); i++) {
-			Product product = productService.getProductById(productIds.get(i));
-			OrderItem orderItem = new OrderItem();
-			orderItem.setProduct(product);
-			orderItem.setQuantity(quantities.get(i));
-			orderItem.setPrice(product.getPrice() * quantities.get(i));
-			orderItems.add(orderItem);
-		}
-		
-		orderService.createOrder(customerId, orderItems, paymentMethod);
-		return "redirect:/orders";
-	}
-	
 	@GetMapping("/admin/orders")
 	public String getAllOrders(Model model) {
-		model.addAttribute("orders", orderService.getAllOrders());
-		return "orders";
+		List<Order> pendingOrders = orderService.getOrdersByStatus("Pending");
+		List<Order> processingOrders = orderService.getOrdersByStatus("Processing");
+		List<Order> shippedOrders = orderService.getOrdersByStatus("Shipped");
+		
+		model.addAttribute("pendingOrders", pendingOrders);
+		model.addAttribute("processingOrders", processingOrders);
+		model.addAttribute("shippedOrders", shippedOrders);
+		return "admin-orders";
+	}
+	
+	@GetMapping("/admin/orders/{id}")
+	public String getOrderAdmin(@PathVariable Long id, Model model) {
+		model.addAttribute("order", orderService.getOrderById(id));
+		
+		return "admin-order";
+	}
+	
+	@GetMapping("/admin/orders/{id}/process")
+	public String updateStatusToProcess(@PathVariable Long id) {
+		orderService.updateOrderStatus(id, "Processing");
+		
+		return "redirect:/admin/orders";
+	}
+	
+	@GetMapping("/admin/orders/{id}/ship")
+	public String updateStatusToShip(@PathVariable Long id) {
+		orderService.updateOrderStatus(id, "Shipped");
+		
+		return "redirect:/admin/orders";
 	}
 	
 	@GetMapping("/orders/{id}")
@@ -60,9 +67,15 @@ public class OrderController {
 	}
 	
 	@GetMapping("/orders/delete/{id}")
-	public String deleteOrder(@PathVariable Long id) {
-		orderService.deleteOrder(id);
-		return "redirect:/orders";
+	public String deleteOrder(@PathVariable Long id, Model model) {
+		Order order = orderService.getOrderById(id);
+		if (order.getStatus().equals("Pending")) {
+			orderService.deleteOrder(id);
+			return "redirect:/orders";			
+		}
+		model.addAttribute("order", order);
+		model.addAttribute("error", true);
+		return "/order";
 	}
 	
 	@GetMapping("/orders")

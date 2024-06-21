@@ -24,10 +24,6 @@ public class OrderItem {
 	private Integer quantity;
 	private Float price;
 	
-	public Long getId() {
-		return id;
-	}
-	
 	public OrderItem() {
 		
 	}
@@ -37,7 +33,10 @@ public class OrderItem {
         this.quantity = quantity;
         this.price = price;
     }
-
+	
+	public Long getId() {
+		return id;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -64,5 +63,8 @@ public class OrderItem {
 	}
 	public void setPrice(Float price) {
 		this.price = price;
+	}
+	public Float getTotalPrice() {
+		return price * quantity;
 	}
 }
