@@ -90,7 +90,8 @@
 				</div>
 
 				<!-- Back to Orders Button -->
-				<a href="/admin/orders" class="btn btn-primary">Back to Orders</a>
+				<a th:href="@{/admin/orders}" class="btn btn-primary">Back to Orders</a>
+				<a th:href="@{/admin/orders/delete/} + ${order.id}" class="btn btn-danger">Delete order</a>
 			</div>
 		</div>
 	</main>

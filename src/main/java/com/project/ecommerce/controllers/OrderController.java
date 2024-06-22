@@ -60,6 +60,13 @@ public class OrderController {
 		return "redirect:/admin/orders";
 	}
 	
+	@GetMapping("/admin/orders/delete/{id}")
+	public String deleteOrderAdmin(@PathVariable Long id) {
+		orderService.deleteOrder(id);
+		
+		return "redirect:/admin/orders";
+	}
+	
 	@GetMapping("/orders/{id}")
 	public String getOrderById(@PathVariable Long id, Model model) {
 		model.addAttribute("order", orderService.getOrderById(id));
