@@ -55,6 +55,11 @@ public class UserService {
 		return userRepository.findByUsername(username);
 	}
 	
+	public List<UserEntity> getUsersByRole(String roleName) {
+		Role role = roleRepository.findByName(roleName);
+		return userRepository.findByRoles(Arrays.asList(role));
+	}
+	
 	public void updateUser(UserEntity user, Long id) {
 		UserEntity u = userRepository.findById(id).orElse(null);
 		
@@ -70,6 +75,9 @@ public class UserService {
 	}
 	
 	public void deleteUser(Long id) {
-		userRepository.deleteById(id);
+		UserEntity user = userRepository.findById(id).orElse(null);
+		
+		user.getRoles().clear();
+		userRepository.delete(user);
 	}
 }
