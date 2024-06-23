@@ -38,7 +38,7 @@
                             <td th:text="${order.id}"></td>
                             <td th:text="${order.customer.name}"></td>
                             <td th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
-                            <td th:text="${order.total}"></td>
+                            <td th:text="${order.total} + '$'"></td>
                             <td>
                                 <a th:href="@{/admin/orders/{id}(id=${order.id})}" class="btn btn-primary">View</a>
                                 <a th:href="@{/admin/orders/{id}/process(id=${order.id})}" class="btn btn-success">Process</a>
@@ -63,7 +63,7 @@
                             <td th:text="${order.id}"></td>
                             <td th:text="${order.customer.name}"></td>
                             <td th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
-                            <td th:text="${order.total}"></td>
+                            <td th:text="${order.total} + '$'"></td>
                             <td>
                                 <a th:href="@{/admin/orders/{id}(id=${order.id})}" class="btn btn-primary">View</a>
                                 <a th:href="@{/admin/orders/{id}/ship(id=${order.id})}" class="btn btn-warning">Ship</a>
@@ -88,7 +88,7 @@
                             <td th:text="${order.id}"></td>
                             <td th:text="${order.customer.name}"></td>
                             <td th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
-                            <td th:text="${order.total}"></td>
+                            <td th:text="${order.total} + '$'"></td>
                             <td>
                                 <a th:href="@{/admin/orders/{id}(id=${order.id})}" class="btn btn-primary">View</a>
                             </td>

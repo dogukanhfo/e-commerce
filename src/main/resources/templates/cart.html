@@ -24,8 +24,8 @@
 						<tr th:each="item : ${cart.items}">
 							<td th:text="${item.product.name}"></td>
 							<td th:text="${item.quantity}"></td>
-							<td th:text="${item.product.price}"></td>
-							<td th:text="${item.totalPrice}"></td>
+							<td th:text="${item.product.price} + '$'"></td>
+							<td th:text="${item.totalPrice} + '$'"></td>
 							<td>
 								<form th:action="@{/cart/remove}" method="post">
 									<input type="hidden" name="productId"
@@ -38,7 +38,7 @@
 				</table>
 				<div>
 					<h3>
-						Total: <span th:text="${cart.totalAmount}"></span>
+						Total: <span th:text="${cart.totalAmount} + '$'"></span>
 					</h3>
 					<a href="/checkout" class="btn btn-success">Checkout</a>
 				</div>
