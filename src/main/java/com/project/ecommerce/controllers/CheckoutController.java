@@ -33,7 +33,7 @@ public class CheckoutController {
 	private UserService userService;
 	
 	@PostMapping
-	public String checkout(HttpSession session, Authentication authentication, @RequestParam String paymentMethod) {
+	public String checkout(HttpSession session, Authentication authentication, @RequestParam String address, @RequestParam String paymentMethod) {
 		Cart cart = (Cart) session.getAttribute("cart");
 		if (cart != null) {
 			String username = authentication.getName();
@@ -41,7 +41,7 @@ public class CheckoutController {
 			List<OrderItem> orderItems = cart.getItems().stream()
 					.map(item -> new OrderItem(null, productService.getProductById(item.getProduct().getId()), item.getQuantity(), item.getTotalPrice()))
 					.collect(Collectors.toList());
-			orderService.createOrder(customerId, orderItems, paymentMethod);
+			orderService.createOrder(customerId, orderItems, address, paymentMethod);
             session.removeAttribute("cart");
 		}
 		return "redirect:/checkout/order-confirmation";

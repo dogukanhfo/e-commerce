@@ -29,6 +29,7 @@ public class Order {
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<OrderItem> orderItems = new ArrayList<>();
 	
+	private String address;
 	private LocalDateTime orderDate;
 	private String status;
 	private String paymentMethod;
@@ -53,6 +54,12 @@ public class Order {
 	}
 	public LocalDateTime getOrderDate() {
 		return orderDate;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public void setOrderDate(LocalDateTime orderDate) {
 		this.orderDate = orderDate;

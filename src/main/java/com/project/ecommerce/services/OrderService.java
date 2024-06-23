@@ -19,11 +19,12 @@ public class OrderService {
 	@Autowired
 	private UserService userService;
 	
-	public Order createOrder(Long customerId, List<OrderItem> orderItems, String paymentMethod) {
+	public Order createOrder(Long customerId, List<OrderItem> orderItems, String adress, String paymentMethod) {
 		UserEntity customer = userService.getUserById(customerId);
 		Order order = new Order();
 		order.setCustomer(customer);
 		order.setOrderItems(orderItems);
+		order.setAddress(adress);
 		order.setOrderDate(LocalDateTime.now());
 		order.setStatus("Pending");
 		order.setPaymentMethod(paymentMethod);
